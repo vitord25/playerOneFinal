@@ -1,0 +1,28 @@
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 24px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Responsividade: Ajusta as colunas dinamicamente baseado na tela */
+@media (min-width: 480px) {
+  .games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .games-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* Fica com 3 colunas idêntico à foto */
+  }
+}
+
+.no-games-message {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--muted-foreground); /* Substituído #666 por variável do tema */
+  margin-top: 40px;
+}

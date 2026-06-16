@@ -1,0 +1,519 @@
+/* ==========================================================================
+   CONTAINER MASTER
+   ========================================================================== */
+.my-parties-wrapper {
+  min-height: 100vh;
+  background-color: var(--background); /* 🌟 Dinâmico (Slate 50 / Dark BG) */
+  color: var(--foreground);            /* 🌟 Dinâmico (Slate 900 / Off-white) */
+  font-family: 'Inter', sans-serif;
+  padding-bottom: 60px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* HEADER FIXO */
+.my-parties-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(var(--background-rgb, 255, 255, 255), 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Força fundo escuro translúcido no header durante o Dark Mode */
+:is(.dark *) .my-parties-header {
+  background-color: rgba(15, 23, 42, 0.85);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.my-parties-header-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.my-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* BOTÃO DE VOLTAR */
+.btn-my-back {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-my-back:hover {
+  background-color: var(--input-background);
+  border-color: var(--border);
+}
+
+:is(.dark *) .btn-my-back:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.my-header-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+/* DASHBOARD LAYOUT CONTROLLER */
+.my-parties-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.my-parties-dashboard-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-dashboard-intro {
+  margin-bottom: 28px;
+}
+
+.my-dashboard-intro h2 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--foreground);
+  margin: 0 0 6px 0;
+}
+
+.my-dashboard-subtext {
+  font-size: 0.95rem;
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+/* ==========================================================================
+   TABS SYSTEM (LISTA DE SELEÇÃO ENTRE CRIADAS / PARTICIPANDO)
+   ========================================================================== */
+.my-tabs-list {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 24px;
+  padding-bottom: 1px;
+  transition: border-color 0.3s ease;
+}
+
+:is(.dark *) .my-tabs-list {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.my-tab-trigger {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: -2px;
+}
+
+.my-tab-trigger:hover {
+  color: var(--foreground);
+}
+
+.my-tab-trigger.active {
+  color: var(--foreground);
+  border-bottom-color: var(--primary); /* Linha indicadora dinâmica ativa */
+}
+
+/* Garante brilho ideal na linha da tab ativa no Dark Mode */
+:is(.dark *) .my-tab-trigger.active {
+  border-bottom-color: var(--foreground);
+}
+
+.relative-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* CONTADOR DE NOTIFICAÇÕES (BADGE LARANJA DE SOLICITAÇÕES) */
+.my-requests-badge-count {
+  background-color: #f97316; /* Mantém tom de aviso vivo */
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 20px;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+}
+
+/* GRID DOS CARDS DE COMPROMISSO */
+.my-parties-grid-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ==========================================================================
+   CARDS DE COMPROMISSOS DE PARTYS
+   ========================================================================== */
+.my-custom-card {
+  background: var(--card); /* 🌟 Fundo escuro ou claro automático */
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+:is(.dark *) .my-custom-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Diferenciação opcional visual para as partys onde sou dono */
+.highlight-host-card {
+  border-left: 4px solid var(--primary);
+}
+
+:is(.dark *) .highlight-host-card {
+  border-left-color: rgba(255, 255, 255, 0.6);
+}
+
+.my-card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+/* Pílula indicando que você é o Dono (Host) */
+.host-indicator-pill {
+  display: inline-block;
+  background-color: var(--input-background);
+  color: var(--foreground);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  border: 1px solid var(--border);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+:is(.dark *) .host-indicator-pill {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.guest-indicator-label {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.my-card-game-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0 0 4px 0;
+}
+
+.my-card-game-desc {
+  font-size: 0.9rem;
+  color: var(--foreground);
+  opacity: 0.8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* BADGES DE ESTADO DA SUA PARTICIPAÇÃO */
+.my-status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.badge-approved {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+:is(.dark *) .badge-approved {
+  background-color: rgba(22, 163, 74, 0.15);
+  color: #4ade80;
+  border-color: rgba(22, 163, 74, 0.25);
+}
+
+.badge-joined {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+:is(.dark *) .badge-joined {
+  background-color: rgba(37, 99, 235, 0.15);
+  color: #60a5fa;
+  border-color: rgba(37, 99, 235, 0.25);
+}
+
+/* SUBGRID DE DETALHES TÉCNICOS (DATA/HORA/SLOTS) */
+.my-card-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+  transition: border-color 0.3s ease;
+}
+
+:is(.dark *) .my-card-details-grid {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.my-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+}
+
+.my-detail-item span {
+  font-size: 1.05rem !important;
+  color: var(--muted-foreground);
+  opacity: 0.7;
+}
+
+/* BOTÃO INTERNO DE DETALHAMENTO */
+.btn-my-card-action {
+  width: 100%;
+  background-color: var(--input-background);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+:is(.dark *) .btn-my-card-action {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.btn-my-card-action span {
+  font-size: 1.15rem !important;
+}
+
+.btn-my-card-action:hover {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border-color: var(--primary);
+}
+
+:is(.dark *) .btn-my-card-action:hover {
+  background-color: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
+}
+
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS DO FLUXO DE SOLICITAÇÃO (REQUESTS TAB)
+   ========================================================================== */
+.request-card-layout {
+  border-top: 4px solid #f97316; /* Destaca ação pendente de aprovação */
+}
+
+.request-card-top {
+  margin-bottom: 14px;
+}
+
+.request-game-context {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.request-time-context {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  margin: 2px 0 0 0;
+}
+
+/* BARRA DE PERFIL DO ALUNO SOLICITANTE */
+.request-user-profile-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--input-background);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+:is(.dark *) .request-user-profile-bar {
+  background-color: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.my-avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+:is(.dark *) .my-avatar-circle {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.my-avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.my-avatar-fallback {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted-foreground);
+}
+
+.request-user-info {
+  flex: 1;
+}
+
+.request-user-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.request-user-date-sub {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+/* AÇÕES DUAIS DE DECISÃO (ACEITAR / RECUSAR) */
+.request-actions-dual-row {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-request-decision {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.btn-request-decision span {
+  font-size: 1.1rem !important;
+}
+
+/* Botão Aceitar Solicitação */
+.btn-request-decision.approve-trigger {
+  background-color: #16a34a;
+  color: #ffffff;
+}
+
+/* Botão Recusar Solicitação */
+.btn-request-decision.reject-trigger {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.btn-request-decision:hover {
+  opacity: 0.9;
+}
+
+.btn-request-decision:active {
+  transform: scale(0.98);
+}
+
+/* EMPTY STATES SYSTEM */
+.my-parties-empty-state-pane {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--muted-foreground);
+  font-size: 0.95rem;
+}
+
+.big-empty-icon {
+  font-size: 2.5rem !important;
+  color: var(--border);
+  margin-bottom: 12px;
+}
+
+.btn-my-empty-action {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 14px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+:is(.dark *) .btn-my-empty-action {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.btn-my-empty-action:hover {
+  opacity: 0.9;
+}

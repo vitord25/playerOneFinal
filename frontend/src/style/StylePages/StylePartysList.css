@@ -1,0 +1,457 @@
+/* ==========================================================================
+   CONTAINER CENTRAL E SUAS DIRETRIZES
+   ========================================================================== */
+.parties-list-wrapper {
+  min-height: 100vh;
+  background-color: var(--background); /* 🌟 Dinâmico (Slate 50 / Dark BG) */
+  color: var(--foreground);            /* 🌟 Dinâmico (Slate 900 / Off-white) */
+  font-family: 'Inter', sans-serif;
+  padding-bottom: 40px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* HEADER DA LISTAGEM */
+.parties-list-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(var(--background-rgb, 255, 255, 255), 0.9); 
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Força o Header a puxar fundo escuro translúcido no dark mode */
+:is(.dark *) .parties-list-header {
+  background-color: rgba(15, 23, 42, 0.85);
+}
+
+.parties-list-header-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* BOTÃO DE VOLTAR */
+.btn-icon-back {
+  background: var(--card);          
+  border: 1px solid var(--border);  
+  color: var(--foreground);        
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-icon-back:hover {
+  background-color: var(--input-background);
+  border-color: var(--border);
+}
+
+/* TEXTOS DO HEADER */
+.header-title-text h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground); 
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.sub-header-text {
+  font-size: 0.875rem;
+  color: var(--muted-foreground); 
+  margin: 4px 0 0 0;
+  transition: color 0.3s ease;
+}
+
+/* BOTÃO "CRIAR PARTY'S" */
+.btn-parties-create-new {
+  background: var(--primary); 
+  border: 1px solid var(--primary);
+  color: var(--primary-foreground);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-parties-create-new:hover {
+  opacity: 0.9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-icon-inner {
+  font-size: 1.15rem !important;
+}
+
+/* CONTAINER PRINCIPAL DO GRID */
+.parties-list-main {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.parties-grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ==========================================================================
+   CARDS DE PARTYS (LISTA DISPONÍVEL)
+   ========================================================================== */
+.party-glass-card {
+  background: var(--card); /* 🌟 Grafite elegante no Dark Mode automaticamente */
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.3s ease;
+}
+
+.party-glass-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Adiciona um brilho sutil de borda no hover exclusivo para o modo escuro */
+:is(.dark *) .party-glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.party-card-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.party-title-block h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--foreground); 
+  margin: 0 0 4px 0;
+  transition: color 0.3s ease;
+}
+
+.party-host-label {
+  font-size: 0.85rem;
+  color: var(--muted-foreground); 
+  transition: color 0.3s ease;
+}
+
+/* BADGE DE JOGADORES (SLOTS) */
+.party-slots-badge {
+  background: var(--input-background); 
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--foreground);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* 🌟 CORREÇÃO INTERATIVA: Força contraste total no Modo Escuro */
+:is(.dark *) .party-slots-badge {
+  /* Fundo grafite ligeiramente iluminado para se descolar do fundo do card */
+  background-color: rgba(255, 255, 255, 0.07) !important; 
+  
+  /* Borda sutil que desenha o formato arredondado na escuridão */
+  border-color: rgba(255, 255, 255, 0.18) !important; 
+  
+  /* Texto em branco puro para leitura imediata */
+  color: #ffffff !important; 
+}
+
+/* Garante que o ícone de pessoinhas acompanhe a cor clara do texto */
+.badge-icon {
+  font-size: 1.1rem !important;
+  color: var(--muted-foreground);
+}
+
+:is(.dark *) .badge-icon {
+  color: rgba(255, 255, 255, 0.8) !important; /* Ícone visível e nítido */
+}
+
+.badge-icon {
+  font-size: 1.1rem !important;
+  color: var(--muted-foreground);
+}
+
+.party-card-description {
+  font-size: 0.95rem;
+  color: var(--foreground); 
+  opacity: 0.85;            
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+  transition: color 0.3s ease;
+}
+
+/* GRADE DE INFORMAÇÕES DO AGENDAMENTO */
+.party-info-subgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+  border-top: 1px solid var(--border); 
+  padding-top: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.party-info-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--muted-foreground); 
+  transition: color 0.3s ease;
+}
+
+.meta-icon {
+  font-size: 1.15rem !important;
+  color: var(--muted-foreground); 
+}
+
+.col-span-2 {
+  grid-column: span 2;
+}
+
+/* BOTÃO INTERNO DO CARD "PARTICIPAR / DETALHES" */
+.btn-party-action-detail {
+  width: 100%;
+  
+  /* 🌟 Mudança para Vermelho para seguir a identidade visual do botão "Criar Party's" */
+  background-color: #ff4757 !important; 
+  color: #ffffff !important; /* Texto branco puro garante leitura 100% no escuro */
+  border: none;
+  
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 700; /* Texto ligeiramente mais grosso para destacar o clique */
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 71, 87, 0.2); /* Sombra suave vermelha */
+  transition: all 0.2s ease;
+}
+
+.btn-party-action-detail:hover {
+  background-color: #ff6b81 !important; /* Vermelho mais vivo ao passar o mouse */
+  box-shadow: 0 6px 16px rgba(255, 71, 87, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-party-action-detail:active {
+  transform: scale(0.98);
+}
+
+
+/* ==========================================================================
+   ESTADOS DE AGUARDANDO AUTORIZAÇÃO / MOMENTO DE ESPERA (MODO ESCURO FIX)
+   ========================================================================== */
+
+/* Esmaece o card inteiro suavemente em ambos os temas sem "esbranquiçar" no dark */
+.party-card-disabled {
+  opacity: 0.65; /* Aumentado ligeiramente de 0.55 para 0.65 para melhorar a leitura dos textos do card */
+  border-color: var(--border);
+  background-color: var(--input-background);
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Ajuste específico para o card esmaecido quando estiver no modo escuro */
+:is(.dark *) .party-card-disabled {
+  background-color: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* O Botão no momento em que vira "Solicitado" ou entra em "Aguardando" */
+.btn-party-action-detail.btn-requested {
+  background-color: var(--muted) !important;
+  border-color: var(--border) !important;
+  color: var(--muted-foreground) !important;
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* 🌟 CORREÇÃO DO BUG: Contraste do botão "Aguardando Autorização" no Modo Escuro */
+:is(.dark *) .btn-party-action-detail.btn-requested {
+  /* Substitui o cinza apagado anterior por um fundo cinza chumbo perceptível */
+  background-color: rgba(255, 255, 255, 0.12) !important; 
+  
+  /* Borda nítida em tom de cinza claro para desenhar o contorno do botão */
+  border: 1px solid rgba(255, 255, 255, 0.25) !important; 
+  
+  /* Texto clareado (cinza bem claro/quase branco) para garantir leitura excelente */
+  color: rgba(255, 255, 255, 0.85) !important; 
+}
+
+/* O Botão no momento em que vira "Solicitado" ou entra em "Aguardando" */
+.btn-party-action-detail.btn-requested {
+  background-color: var(--muted) !important;
+  border-color: var(--border) !important;
+  color: var(--muted-foreground) !important;
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Ajuste de contraste para o botão solicitado no Dark Mode para não sumir no fundo */
+:is(.dark *) .btn-party-action-detail.btn-requested {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Ícone de Loading animado rotacionando */
+.btn-inline-icon {
+  font-size: 1.1rem !important;
+  animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   ESTRUTURA DO POP-UP (MODAL DE SOLICITAÇÃO ENVIADA)
+   ========================================================================== */
+.party-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.6); 
+  backdrop-filter: blur(6px);              
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+:is(.dark *) .party-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.7); /* Película levemente mais densa no dark */
+}
+
+.party-modal-card {
+  background-color: var(--card); 
+  border-radius: 16px;
+  width: 90%;
+  max-width: 440px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+  animation: scaleUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Círculo do ícone de sucesso em formato adaptável */
+.party-modal-icon-wrapper {
+  background-color: rgba(22, 163, 74, 0.1); 
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  border: 1px solid rgba(22, 163, 74, 0.3);
+}
+
+.party-modal-success-icon {
+  font-size: 2rem !important;
+  color: #16a34a; 
+}
+
+.party-modal-card h2 {
+  font-size: 1.4rem;
+  color: var(--foreground); 
+  margin: 0 0 12px 0;
+  font-weight: 700;
+}
+
+.party-modal-card p {
+  font-size: 0.95rem;
+  color: var(--foreground);
+  opacity: 0.85;
+  line-height: 1.6;
+  margin: 0 0 8px 0;
+}
+
+.party-modal-card strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.party-modal-subtext {
+  font-size: 0.85rem !important;
+  color: var(--muted-foreground) !important;
+  margin-bottom: 24px !important;
+}
+
+/* Botão de Fechar do Pop-up */
+.btn-party-modal-close {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  width: 100%;
+}
+
+.btn-party-modal-close:hover {
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   ANIMAÇÕES DE ENTRADA
+   ========================================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

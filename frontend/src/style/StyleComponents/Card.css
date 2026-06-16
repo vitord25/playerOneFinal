@@ -1,0 +1,71 @@
+.game-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4; 
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border); /* 🌟 Evita que o card suma no fundo preto */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.game-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Faz a imagem cobrir todo o card sem distorcer */
+}
+
+/* Container do título cinza translúcido */
+.game-card-overlay {
+  position: absolute;
+  bottom: 16px;       /* Alinhado na parte inferior */
+  left: 16px;   
+  background: transparent !important; /* 👈 REMOVE O FUNDO TOTAL */
+  backdrop-filter: none !important;      /* Alinhado à esquerda */
+  padding: 6px 9px;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.game-card-info, .game-card-title-container {
+  background: transparent !important;       /* 👈 REMOVE O FUNDO (deixa transparente) */
+  background-color: transparent !important; /* 👈 Garante que nenhum fundo cinza/verde apareça */
+  border: none !important;                  /* Remove bordas se houver */
+  padding: 8px 4px;                         /* Mantém apenas um respiro para o texto */
+}
+
+/* Nome do jogo em negrito (Bold) */
+.game-card-title {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1rem;         /* 👈 ALTERADO: De #444444 para Branco total */
+  font-weight: 800;       /* Mantém a fonte Bold solicitada */
+  letter-spacing: 0.5px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8), 0px 4px 10px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Badge de Indisponível (igual à imagem no card do W.A.R) */
+.badge-unavailable {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #ff4d4d;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}

@@ -1,0 +1,250 @@
+/* src/style/Auth.css */
+
+.auth-page-body {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: var(--background);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   LADO ESQUERDO - FORMULÁRIO
+   ========================================================================== */
+.auth-left-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: var(--background);
+}
+
+.auth-form-wrapper {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container do ícone da logo com fundo estilizado e centralizado */
+.auth-logo-box {
+  width: 64px;  
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto; /* Centraliza horizontalmente e dá espaço para o título */
+  
+  background-color: var(--input-background, #f3f3f5);
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.auth-logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Títulos e Subtítulos */
+.auth-form-wrapper h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--foreground);
+  text-align: center; /* Centraliza o título */
+}
+
+.auth-form-wrapper p {
+  font-size: 0.95rem;
+  color: var(--muted-foreground);
+  margin-bottom: 24px;
+  text-align: center; /* Centraliza o subtítulo */
+}
+
+/* Inputs e Formulários */
+.auth-form-wrapper label {
+  font-size: 0.85rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.auth-form-wrapper input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background-color: var(--input-background);
+  
+  /* 🌟 GARANTE A LEITURA NO MODO CLARO */
+  color: var(--foreground);
+  
+  margin-bottom: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-form-wrapper input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(3, 2, 19, 0.1);
+}
+
+/* Botão de Enviar */
+.auth-form-wrapper button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: var(--font-weight-medium);
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  transition: opacity 0.2s;
+}
+
+.auth-form-wrapper button[type="submit"]:hover {
+  opacity: 0.9;
+}
+
+/* Links de navegação inferior */
+.auth-link-text {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  margin-bottom: 8px;
+}
+
+.auth-link-text a, .auth-link-green {
+  color: #10b981;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-link-text a:hover, .auth-link-green:hover {
+  text-decoration: underline;
+}
+
+/* Botão Esqueci minha senha */
+.forgot-password-btn {
+  background: none;
+  border: none;
+  color: var(--destructive);
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 auto;
+  display: block;
+}
+
+/* ==========================================================================
+   LADO DIREITO - IMAGEM DE DESTAQUE
+   ========================================================================== */
+.auth-right-side {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente o texto na imagem */
+  align-items: center;     /* Centraliza horizontalmente o bloco de texto */
+  padding: 60px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.auth-right-side::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, rgba(3, 2, 19, 0.2), rgba(3, 2, 19, 0.85));
+  z-index: 1;
+}
+
+.auth-right-side h1, .auth-right-side p {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  text-align: center; /* Garante que os títulos da direita quebrem centralizados */
+}
+
+.auth-right-side h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.auth-right-side p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  max-width: 500px;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE E TEMA ESCURO
+   ========================================================================== */
+@media (max-width: 900px) {
+  .auth-right-side {
+    display: none;
+  }
+  .auth-left-side {
+    flex: 1;
+    padding: 24px;
+  }
+}
+
+/* 🌟 SEÇÃO REFORMULADA: Suporte ao Dark Mode para páginas de autenticação */
+:is(.dark *) .auth-logo-box {
+  background-color: var(--input-background);
+  border-color: var(--border);
+}
+
+/* 🌟 SOLUÇÃO DO BUG: Força o texto digitado a ficar branco puro no Dark Mode */
+:is(.dark *) .auth-form-wrapper input {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Garante o destaque de foco também no modo escuro */
+:is(.dark *) .auth-form-wrapper input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(255, 71, 87, 0.24);
+}
+/* ===== Mensagens de feedback (login/cadastro) ===== */
+.auth-error-box {
+  width: 100%;
+  background: #fdecea;
+  color: #b71c1c;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.auth-success-box {
+  width: 100%;
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  text-align: center;
+}
