@@ -1,0 +1,31 @@
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Caches Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Testes / cobertura
+tests/
+.coverage
+htmlcov/
+
+# Configs locais e segredos
+.env
+.git/
+.gitignore
+
+# IDE / SO
+.vscode/
+.idea/
+.DS_Store
+
+# Documentação (não necessária na imagem)
+docs/
+README.md

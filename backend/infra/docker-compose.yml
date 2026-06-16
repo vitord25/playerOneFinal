@@ -1,0 +1,116 @@
+services:
+
+  # ---------------------------------------------------------------------------
+  # API — FastAPI (Ludoteca)
+  # Build a partir da raiz do projeto (contexto = ..), usando o Dockerfile.
+  # ---------------------------------------------------------------------------
+  api:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: ludoteca-api:latest
+    container_name: ludoteca_api
+    restart: always
+    environment:
+      APP_NAME: Ludoteca
+      # Hosts apontam para os NOMES DOS SERVIÇOS dentro da rede do compose
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ludoteca
+      MYSQL_USER: ludoteca_user
+      MYSQL_PASSWORD: ludoteca_pass
+      JWT_SECRET_KEY: super_secret_key_change_me_in_production
+      JWT_ALGORITHM: HS256
+      JWT_EXPIRE_MINUTES: 60
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: guest
+      RABBITMQ_PASSWORD: guest
+    ports:
+      - "8000:8000"
+    networks:
+      - ludoteca_net
+    depends_on:
+      mysql:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.0
+    container_name: ludoteca_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ludoteca
+      MYSQL_USER: ludoteca_user
+      MYSQL_PASSWORD: ludoteca_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ../docs/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - ludoteca_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: ludoteca_rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - ludoteca_net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ludoteca_prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - ludoteca_net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ludoteca_grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    networks:
+      - ludoteca_net
+    depends_on:
+      - prometheus
+
+volumes:
+  mysql_data:
+  rabbitmq_data:
+  grafana_data:
+
+networks:
+  ludoteca_net:
+    driver: bridge

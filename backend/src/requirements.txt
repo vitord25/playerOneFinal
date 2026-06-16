@@ -1,0 +1,24 @@
+fastapi
+uvicorn[standard]
+
+sqlalchemy
+pymysql
+
+pydantic
+pydantic-settings
+email-validator
+
+python-dotenv
+
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt==4.0.1
+python-multipart
+
+aio-pika
+
+prometheus-fastapi-instrumentator
+
+# Testes
+pytest
+httpx
